@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, jsonify, send_from_directory
 import os
 import shutil
 import torch
+import requests
 import numpy as np
 import cv2
 from segment_anything import sam_model_registry, SamPredictor
