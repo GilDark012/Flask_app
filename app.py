@@ -20,6 +20,21 @@ app = Flask(
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
+os.makedirs("models", exist_ok=True)
+
+# URL du modèle et chemin de destination
+url = "https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth"
+output_path = "models/sam_vit_b_01ec64.pth"
+
+# Téléchargement
+print("Téléchargement du modèle...")
+response = requests.get(url, stream=True)
+with open(output_path, "wb") as f:
+    for chunk in response.iter_content(chunk_size=8192):
+        f.write(chunk)
+
+print("Téléchargement terminé ! Modèle sauvegardé dans :", output_path)
+
 # Charger le modèle SAM
 MODEL_TYPE = "vit_b"
 MODEL_PATH = os.path.join('models', 'sam_vit_b_01ec64.pth')
